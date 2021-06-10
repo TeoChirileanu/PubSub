@@ -1,38 +1,23 @@
 using System;
 using System.Collections.Generic;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using Console = System.Console;
 
 namespace ReactiveImpl.Test
 {
-    public class Subscriber
+    public record Subscriber(Subject<Gpu> GpuListing, IGpuBuyer Buyer, IGpuPriceModifier PriceModifier, IGpuPoster Poster)
     {
-        private readonly IGpuBuyer _gpuBuyer;
-        private readonly IGpuPriceModifier _gpuPriceModifier;
-        private readonly IGpuPoster _gpuPoster;
-
         public IList<Gpu> PostedGpus { get; } = new List<Gpu>();
-
-        public Subscriber(IGpuBuyer gpuBuyer, IGpuPriceModifier gpuPriceModifier, IGpuPoster gpuPoster)
-        {
-            _gpuBuyer = gpuBuyer;
-            _gpuPriceModifier = gpuPriceModifier;
-            _gpuPoster = gpuPoster;
-        }
-
-        public void Subscribe(Broker broker)
-        {
-            broker.GpuListing.ObserveOn(Scheduler.Default).Subscribe(OnNext);
-        }
 
         private void OnNext(Gpu gpu)
         {
-            var boughtGpu = _gpuBuyer?.Buy(gpu);
-            var boughtGpuHavingModifiedPrice = _gpuPriceModifier?.ModifyPrice(boughtGpu);
-            var postedGpu = _gpuPoster?.Post(boughtGpuHavingModifiedPrice);
+            var boughtGpu = Buyer.Buy(gpu);
+            var boughtGpuHavingModifiedPrice = PriceModifier.ModifyPrice(boughtGpu);
+            var postedGpu = Poster.Post(boughtGpuHavingModifiedPrice);
             PostedGpus.Add(postedGpu);
         }
+
+        public void Subscribe() => GpuListing.Subscribe(OnNext);
     }
 
     public interface IGpuBuyer
@@ -51,7 +36,7 @@ namespace ReactiveImpl.Test
         Gpu ModifyPrice(Gpu gpu)
         {
             Console.WriteLine($"Changing price from {gpu.Price} to {gpu.Price * 2}");
-            return new Gpu(gpu.Price * 2);
+            return new Gpu(gpu.Name, gpu.Price * 2);
         }
     }
 
