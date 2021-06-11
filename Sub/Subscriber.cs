@@ -1,23 +1,53 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reactive.Subjects;
 using Messages;
-using Pub;
 
 namespace Sub
 {
-    public class Subscriber
+    public record Subscriber(Subject<Gpu> GpuListing, IGpuBuyer Buyer, IGpuPriceModifier PriceModifier,
+        IGpuPoster Poster)
     {
-        private readonly string _name;
+        public IList<Gpu> PostedGpus { get; } = new List<Gpu>();
 
-        public Subscriber(string name) => _name = name;
-         
-        // todo: how to get rid of publisher ref?
-        public void Subscribe(Publisher publisher) =>
-            // what if make it reactive?
-            publisher.OnPublish += NotificationReceived;
+        private void OnNext(Gpu gpu)
+        {
+            var boughtGpu = Buyer.Buy(gpu);
+            var boughtGpuHavingModifiedPrice = PriceModifier.ModifyPrice(boughtGpu);
+            var postedGpu = Poster.Post(boughtGpuHavingModifiedPrice);
+            PostedGpus.Add(postedGpu);
+        }
 
-        // todo: unsubscribe
+        public void Subscribe()
+        {
+            GpuListing.Subscribe(OnNext);
+        }
+    }
 
-        private void NotificationReceived(object o, ItemAlert item) =>
-            Console.WriteLine($"[{_name}]: Wow, a new GPU is in stock!! {item.ItemInfo}");
+    public interface IGpuBuyer
+    {
+        Gpu Buy(Gpu gpu)
+        {
+            Console.WriteLine($"Buying GPU: {gpu}");
+            return gpu;
+        }
+    }
+
+    public interface IGpuPriceModifier
+    {
+        Gpu ModifyPrice(Gpu gpu)
+        {
+            Console.WriteLine($"Changing price from {gpu.Price} to {gpu.Price * 2}");
+            return new Gpu(gpu.Name, gpu.Price * 2);
+        }
+    }
+
+    public interface IGpuPoster
+    {
+        Gpu Post(Gpu gpu)
+        {
+            Console.WriteLine($"Posting GPU: {gpu}");
+            return gpu;
+        }
     }
 }

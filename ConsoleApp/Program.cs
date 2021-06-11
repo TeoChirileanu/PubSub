@@ -1,9 +1,3 @@
-﻿using System.Threading.Tasks;
-using Pub;
-using Sub;
+﻿using System;
 
-var publisher = new Publisher("Nvidia");
-var subscriber = new Subscriber("Teodor");
-subscriber.Subscribe(publisher);
-
-await Task.Run(async () => await publisher.Publish());
+Console.WriteLine("Hello World!");
