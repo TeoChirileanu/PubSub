@@ -5,23 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9339b20a-49aa-4aac-80ad-02f09f20fc43" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.PubSub/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Broker/Broker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Broker/Broker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Broker/Handler.cs" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/GpuBuyer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/GpuPoster.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/GpuPriceModifier.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Services/Services.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sub/GpuServiceInterfaces/IGpuBuyer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sub/GpuServiceInterfaces/IGpuPoster.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sub/GpuServiceInterfaces/IGpuPriceModifier.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PubSub/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PubSub/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Broker/Topic.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Broker/Topic.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConsoleApp/ConsoleApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ConsoleApp/ConsoleApp.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConsoleApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ConsoleApp/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Messages/ItemAlert.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pub/Pub.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Pub/Pub.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Pub/Publisher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pub/Publisher.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PubSub.sln" beforeDir="false" afterPath="$PROJECT_DIR$/PubSub.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactiveImpl.Test/PubSubTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactiveImpl.Test/Publisher.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactiveImpl.Test/ReactiveImpl.Test.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactiveImpl.Test/Subscriber.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactiveImpl/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactiveImpl/PubSub.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReactiveImpl/ReactiveImpl.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sub/Sub.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Sub/Sub.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Sub/Subscriber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Sub/Subscriber.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +30,16 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
+      <option value="$PROJECT_DIR$/Services/Class1.cs" />
+      <option value="$PROJECT_DIR$/Services/GpuBuyer.cs" />
+      <option value="$PROJECT_DIR$/Broker/Topic.cs" />
+      <option value="$PROJECT_DIR$/Pub/Publisher.cs" />
       <option value="$PROJECT_DIR$/ConsoleApp/Program.cs" />
+      <option value="$PROJECT_DIR$/Sub/GpuServiceInterfaces/IGpuPriceModifier.cs" />
+      <option value="$PROJECT_DIR$/Sub/GpuServiceInterfaces/IGpuBuyer.cs" />
+      <option value="$PROJECT_DIR$/Sub/GpuServiceInterfaces/IGpuPoster.cs" />
+      <option value="$PROJECT_DIR$/Services/GpuPriceModifier.cs" />
+      <option value="$PROJECT_DIR$/Sub/Subscriber.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tntPoNc7Mh9rQUJ1jlXNvosvlW" />
@@ -81,13 +86,14 @@
       <option name="presentableId" value="Default" />
       <updated>1623416662640</updated>
       <workItem from="1623416668742" duration="167000" />
+      <workItem from="1623416960992" duration="3634000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -99,6 +105,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

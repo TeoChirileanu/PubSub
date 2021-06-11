@@ -2,52 +2,22 @@
 using System.Collections.Generic;
 using System.Reactive.Subjects;
 using Messages;
+using Sub.GpuServiceInterfaces;
 
 namespace Sub
 {
-    public record Subscriber(Subject<Gpu> GpuListing, IGpuBuyer Buyer, IGpuPriceModifier PriceModifier,
-        IGpuPoster Poster)
+    public record Subscriber(IGpuBuyer Buyer, IGpuPriceModifier Modifier, IGpuPoster Poster) // todo: make them readonly
     {
         public IList<Gpu> PostedGpus { get; } = new List<Gpu>();
 
         private void OnNext(Gpu gpu)
         {
-            var boughtGpu = Buyer.Buy(gpu);
-            var boughtGpuHavingModifiedPrice = PriceModifier.ModifyPrice(boughtGpu);
-            var postedGpu = Poster.Post(boughtGpuHavingModifiedPrice);
-            PostedGpus.Add(postedGpu);
+            Buyer.Buy(gpu);
+            var updatedGpu = Modifier.ModifyPrice(gpu);
+            Poster.Post(updatedGpu);
+            PostedGpus.Add(gpu);
         }
 
-        public void Subscribe()
-        {
-            GpuListing.Subscribe(OnNext);
-        }
-    }
-
-    public interface IGpuBuyer
-    {
-        Gpu Buy(Gpu gpu)
-        {
-            Console.WriteLine($"Buying GPU: {gpu}");
-            return gpu;
-        }
-    }
-
-    public interface IGpuPriceModifier
-    {
-        Gpu ModifyPrice(Gpu gpu)
-        {
-            Console.WriteLine($"Changing price from {gpu.Price} to {gpu.Price * 2}");
-            return new Gpu(gpu.Name, gpu.Price * 2);
-        }
-    }
-
-    public interface IGpuPoster
-    {
-        Gpu Post(Gpu gpu)
-        {
-            Console.WriteLine($"Posting GPU: {gpu}");
-            return gpu;
-        }
+        public void Subscribe(Subject<Gpu> topic) => topic.Subscribe(OnNext);
     }
 }

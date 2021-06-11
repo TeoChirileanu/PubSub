@@ -5,4 +5,11 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Broker\Broker.csproj" />
+    <ProjectReference Include="..\Pub\Pub.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
+    <ProjectReference Include="..\Sub\Sub.csproj" />
+  </ItemGroup>
+
 </Project>
