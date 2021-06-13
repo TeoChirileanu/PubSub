@@ -3,8 +3,9 @@ using Messages;
 
 namespace Broker
 {
-    public static class Topic // I usually avoid static classes but I'll give this one a try this time
+    public static class Topic // todo: avoid static classes (except extension methods)
     {
-        public static Subject<Gpu> GpuListing { get; } = new(); // make it static -> make it system-wide
+        // I found RX to be the most elegant solution to pub-sub
+        public static Subject<Gpu> GpuListing { get; } = new();
     }
 }

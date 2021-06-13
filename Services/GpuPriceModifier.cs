@@ -7,7 +7,7 @@ namespace Services
     {
         public Gpu ModifyPrice(Gpu gpu)
         {
-            return gpu with{Price = gpu.Price * 2};
+            return gpu with {Price = gpu.Price * 2};
         }
     }
 }

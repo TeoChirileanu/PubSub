@@ -8,6 +8,7 @@ namespace Sub.GpuServiceInterfaces
         Gpu ModifyPrice(Gpu gpu)
         {
             Console.WriteLine($"Modifying Price for {gpu}");
+            // todo: apply modify price strategy
             return gpu;
         }
     }

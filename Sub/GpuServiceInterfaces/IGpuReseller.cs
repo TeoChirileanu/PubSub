@@ -2,8 +2,8 @@
 
 namespace Sub.GpuServiceInterfaces
 {
-    public interface IGpuBuyer
+    public interface IGpuReseller
     {
-        void Buy(Gpu gpu);
+        void Resell(Gpu gpu);
     }
 }

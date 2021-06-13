@@ -3,9 +3,9 @@ using Sub.GpuServiceInterfaces;
 
 namespace Services
 {
-    public class GpuBuyer : IGpuBuyer
+    public class GpuReseller : IGpuReseller
     {
-        public void Buy(Gpu gpu)
+        public void Resell(Gpu gpu)
         {
             // todo: implement
         }

@@ -1,17 +1,27 @@
-﻿using System;
-using Messages;
+﻿using Messages;
 using Pub;
 using Services;
 using Sub;
 using static Broker.Topic;
 
-Console.WriteLine("Hello World!");
-
-var amd = new Publisher("Advanced Micro Devices", GpuListing);
-
-var emag = new Subscriber(new GpuBuyer(), new GpuPriceModifier(), new GpuPoster());
+var amd = new Publisher("Advanced Micro Devices");
+var nvidia = new Publisher("Nvidia");
+amd.PublishOn(GpuListing);
+nvidia.PublishOn(GpuListing);
+var emag = MakeSubscriber("eMag");
+var cel = MakeSubscriber("Cel");
+var altex = MakeSubscriber("Altex");
 emag.Subscribe(GpuListing);
+cel.Subscribe(GpuListing);
+altex.Subscribe(GpuListing);
+var rtx3070 = new Gpu("RTX 3070", 499);
+var rx5500 = new Gpu("RX 5500", 169);
+amd.Publish(rtx3070);
+nvidia.Publish(rx5500);
 
-var gpu = new Gpu("RTX 3070", 499);
+// todo: check console to see emag getting notified about the new gpu
 
-amd.Publish(gpu);
+static Subscriber MakeSubscriber(string name)
+{
+    return new(name, new GpuBuyer(), new GpuPriceModifier(), new GpuReseller());
+}
